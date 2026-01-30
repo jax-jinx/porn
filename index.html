@@ -2,62 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Auto Image Slider</title>
+    <title>Mobile Friendly Image Slider</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background: black;
-        }
-
         body {
-            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-
-        .slider {
-            width: 100%;
             height: 100vh;
-            position: relative;
-            overflow: hidden;
+            background: #111;
+            margin: 0;
         }
 
         .slider img {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+            width: 90vw;   /* 90% of phone screen width */
+            height: auto;  /* auto height to keep aspect ratio */
+            max-height: 60vh; /* max height so it doesn’t overflow screen */
             object-fit: cover;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-
-        .slider img.active {
-            opacity: 1;
+            display: block;
         }
     </style>
 </head>
 <body>
 
 <div class="slider">
-    <img src="img1.jpg" class="active">
-    <img src="img2.jpg">
-    <img src="img3.jpg">
-    <img src="img4.jpg">
-    <img src="img5.jpg">
+    <img src="img1.jpg" id="slider-image">
 </div>
 
 <script>
-    let images = document.querySelectorAll(".slider img");
+    const images = ["img1.jpg", "img2.jpg", "img3.jpg", "img4.jpg", "img5.jpg"];
     let current = 0;
 
     setInterval(() => {
-        images[current].classList.remove("active");
         current = (current + 1) % images.length;
-        images[current].classList.add("active");
-    }, 3000);
+        document.getElementById("slider-image").src = images[current];
+    }, 3000); // change image every 3 seconds
 </script>
 
 </body>
